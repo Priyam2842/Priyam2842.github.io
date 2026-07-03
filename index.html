@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priyam Bhatnagar — Robotics Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F5F2;
+    --panel:#FFFFFF;
+    --ink:#14181C;
+    --graphite:#5B6570;
+    --blue:#1F5FA8;
+    --blue-dim:#E7EEF6;
+    --amber:#D97B29;
+    --grid-line:rgba(20,24,28,0.08);
+    --hairline:rgba(20,24,28,0.14);
+    --display:'Space Grotesk',sans-serif;
+    --body:'Inter',sans-serif;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.55;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size:32px 32px;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 28px;}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(245,245,242,0.86);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--hairline);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .brand{font-family:var(--mono);font-size:14px;letter-spacing:0.06em;display:flex;align-items:center;gap:10px;}
+  .brand .dot{width:8px;height:8px;background:var(--blue);border-radius:1px;transform:rotate(45deg);}
+  .navlinks{display:flex;gap:28px;font-family:var(--mono);font-size:13px;letter-spacing:0.02em;}
+  .navlinks a{color:var(--graphite);transition:color .15s;}
+  .navlinks a:hover{color:var(--blue);}
+  .navlinks a:focus-visible, a:focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+  .navtoggle{display:none;}
+
+  /* HERO */
+  header.hero{padding:88px 0 64px;}
+  .eyebrow{
+    font-family:var(--mono);font-size:12.5px;color:var(--blue);
+    letter-spacing:0.08em;text-transform:uppercase;margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:'';width:22px;height:1px;background:var(--blue);}
+  h1{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(40px,7vw,74px);letter-spacing:-0.01em;line-height:1.02;
+  }
+  .role{
+    font-family:var(--display);font-weight:500;font-size:clamp(18px,2.4vw,24px);
+    color:var(--graphite);margin-top:14px;
+  }
+  .pitch{max-width:560px;margin-top:22px;font-size:16.5px;color:var(--ink);}
+  .herobtns{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;}
+  .btn{
+    font-family:var(--mono);font-size:13px;padding:12px 20px;border-radius:2px;
+    border:1px solid var(--ink);transition:all .15s;
+  }
+  .btn.primary{background:var(--ink);color:var(--bg);}
+  .btn.primary:hover{background:var(--blue);border-color:var(--blue);}
+  .btn.ghost:hover{background:var(--ink);color:var(--bg);}
+
+  /* status strip */
+  .statusline{
+    margin-top:36px;font-family:var(--mono);font-size:12px;color:var(--graphite);
+    border-top:1px solid var(--hairline);padding-top:14px;display:flex;flex-wrap:wrap;gap:4px 10px;
+  }
+  .statusline b{color:var(--ink);font-weight:500;}
+
+  /* path animation */
+  .pathwrap{margin-top:56px;border:1px solid var(--hairline);background:var(--panel);}
+  .pathwrap .caption{
+    font-family:var(--mono);font-size:11.5px;color:var(--graphite);
+    padding:10px 16px;border-bottom:1px solid var(--hairline);display:flex;justify-content:space-between;
+  }
+  svg.pathsvg{display:block;width:100%;height:auto;}
+  .grid-dot{fill:var(--hairline);}
+  .path-line{
+    fill:none;stroke:var(--blue);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;
+    stroke-dasharray:900;stroke-dashoffset:900;
+    animation:draw 3.2s ease-in-out infinite;
+  }
+  .node{fill:var(--bg);stroke:var(--ink);stroke-width:1.5;}
+  .node.start{fill:var(--amber);stroke:var(--amber);}
+  .node.goal{fill:var(--blue);stroke:var(--blue);}
+  @keyframes draw{
+    0%{stroke-dashoffset:900;}
+    55%{stroke-dashoffset:0;}
+    85%{stroke-dashoffset:0;}
+    100%{stroke-dashoffset:900;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .path-line{animation:none;stroke-dashoffset:0;}
+  }
+
+  /* SECTIONS */
+  section{padding:64px 0;border-top:1px solid var(--hairline);}
+  .sectionhead{display:flex;align-items:baseline;gap:14px;margin-bottom:34px;}
+  .sectionhead .tag{font-family:var(--mono);font-size:12px;color:var(--blue);}
+  .sectionhead h2{font-family:var(--display);font-size:clamp(22px,3vw,30px);font-weight:600;}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;}
+  .about-grid p{font-size:15.5px;color:var(--ink);}
+  .about-grid p + p{margin-top:14px;}
+  .langbox{border:1px solid var(--hairline);background:var(--panel);padding:20px;font-family:var(--mono);font-size:12.5px;}
+  .langbox h3{font-family:var(--body);font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--graphite);margin-bottom:12px;font-weight:600;}
+  .langrow{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--hairline);}
+  .langrow:last-child{border-bottom:none;}
+
+  /* experience timeline */
+  .tl-item{display:grid;grid-template-columns:150px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid var(--hairline);}
+  .tl-item:last-child{border-bottom:none;}
+  .tl-date{font-family:var(--mono);font-size:12px;color:var(--graphite);padding-top:3px;}
+  .tl-role{font-family:var(--display);font-weight:600;font-size:17px;}
+  .tl-org{color:var(--blue);font-size:14px;margin-top:2px;font-weight:500;}
+  .tl-desc{margin-top:10px;font-size:14.5px;color:var(--ink);}
+  .tl-list{margin-top:10px;padding-left:18px;}
+  .tl-list li{font-size:14px;margin-bottom:6px;color:var(--ink);}
+  .tl-list li::marker{color:var(--blue);}
+
+  /* projects */
+  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .card{border:1px solid var(--hairline);background:var(--panel);padding:24px;display:flex;flex-direction:column;}
+  .card .lead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+  .card h3{font-family:var(--display);font-weight:600;font-size:17px;line-height:1.25;}
+  .card .period{font-family:var(--mono);font-size:11px;color:var(--graphite);white-space:nowrap;padding-top:3px;}
+  .card p{font-size:14px;color:var(--ink);margin-top:12px;flex-grow:1;}
+  .metric{
+    margin-top:14px;font-family:var(--mono);font-size:12.5px;color:var(--amber);
+    border-top:1px dashed var(--hairline);padding-top:12px;
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+  .tag-chip{
+    font-family:var(--mono);font-size:10.5px;padding:4px 8px;background:var(--blue-dim);color:var(--blue);
+    border-radius:2px;
+  }
+  .card.wide{grid-column:1 / -1;}
+
+  /* skills */
+  .skill-groups{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 40px;}
+  .skill-group h3{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--graphite);margin-bottom:12px;}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .skill-tags span{
+    font-size:13px;padding:7px 12px;border:1px solid var(--hairline);background:var(--panel);
+  }
+
+  /* education / achievements */
+  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .edu-card{border-left:2px solid var(--blue);padding-left:18px;}
+  .edu-card .school{font-family:var(--display);font-weight:600;font-size:16px;}
+  .edu-card .degree{font-size:14px;color:var(--ink);margin-top:4px;}
+  .edu-card .meta{font-family:var(--mono);font-size:11.5px;color:var(--graphite);margin-top:6px;}
+  .achieve{margin-top:28px;padding:16px 18px;background:var(--blue-dim);border-left:2px solid var(--blue);font-size:14px;}
+
+  /* contact / footer */
+  footer{padding:70px 0 50px;}
+  .contact-box{
+    border:1px solid var(--hairline);background:var(--panel);padding:40px;
+    display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;
+  }
+  .contact-box h2{font-family:var(--display);font-size:clamp(24px,3.4vw,32px);font-weight:600;line-height:1.15;}
+  .contact-box p{margin-top:12px;color:var(--graphite);font-size:14.5px;}
+  .contact-links{display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:13.5px;}
+  .contact-links a{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--hairline);}
+  .contact-links a:hover{color:var(--blue);}
+  .foot-meta{margin-top:30px;font-family:var(--mono);font-size:11.5px;color:var(--graphite);text-align:center;}
+
+  @media (max-width:760px){
+    .about-grid,.proj-grid,.edu-grid,.skill-groups,.contact-box{grid-template-columns:1fr;}
+    .tl-item{grid-template-columns:1fr;gap:6px;}
+    .navlinks{display:none;}
+    .card.wide{grid-column:auto;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>PRIYAM.BHATNAGAR</div>
+    <div class="navlinks">
+      <a href="#about">Profile</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Robotics Developer · Graduate Student, Hochschule Schmalkalden</div>
+    <h1>Priyam<br>Bhatnagar</h1>
+    <div class="role">Autonomous Navigation &amp; Motion Planning</div>
+    <p class="pitch">I build the layer of a robot that decides where to go and how to get there — path planning, sensor fusion, and control tuning across indoor service robots and outdoor field robots.</p>
+
+    <div class="herobtns">
+      <a class="btn primary" href="mailto:bhatnagarpriyam50@gmail.com">Email me →</a>
+      <a class="btn ghost" href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn ghost" href="#" target="_blank" rel="noopener">GitHub</a>
+    </div>
+
+    <div class="statusline">
+      <span><b>Status:</b> Student Visa — full work permit for internships / student jobs</span>
+      <span>·</span>
+      <span>Based in Schmalkalden, Germany</span>
+    </div>
+
+    <div class="pathwrap">
+      <div class="caption"><span>NAV.SIM — indoor path plan, start → goal</span><span>A* / grid search</span></div>
+      <svg class="pathsvg" viewBox="0 0 1000 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of an A* path planning route across a grid, from a start node to a goal node">
+        <!-- grid dots -->
+        <g>
+          <!-- generated grid -->
+          <g id="dots"></g>
+        </g>
+        <path class="path-line" d="M 60 210 L 60 170 L 140 170 L 140 130 L 220 130 L 220 90 L 340 90 L 340 130 L 460 130 L 460 60 L 600 60 L 600 100 L 720 100 L 720 150 L 860 150 L 860 190 L 940 190" />
+        <circle class="node start" cx="60" cy="210" r="7"/>
+        <circle class="node goal" cx="940" cy="190" r="7"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sectionhead"><span class="tag">01 · PROFILE</span><h2>About</h2></div>
+    <div class="about-grid">
+      <div>
+        <p>I work at the intersection of mechanical engineering and robotics software — currently completing an M.Eng. in Mechatronics and Robotics after a B.E. in Mechanical Engineering. My focus is on the perception, localization, and navigation stack: turning sensor data (LiDAR, IMU, GPS, wheel encoders) into a reliable estimate of where a robot is, and a safe, efficient plan for where it should go next.</p>
+        <p>Recent work spans an indoor elderly-assistive robot, a GPS-guided delivery robot, and an outdoor agricultural AMR competing in the Field Robot Event 2026 — giving me hands-on range across ROS/ROS2, Gazebo simulation, sensor fusion (EKF/Kalman filtering), and classical path planning (Dijkstra, A*, RANSAC-based row detection).</p>
+      </div>
+      <div class="langbox">
+        <h3>Languages</h3>
+        <div class="langrow"><span>English</span><span>C1 · Professional</span></div>
+        <div class="langrow"><span>German</span><span>A1 · Basic</span></div>
+        <div class="langrow"><span>Hindi</span><span>Native</span></div>
+        <div class="langrow"><span>Punjabi</span><span>Native</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sectionhead"><span class="tag">02 · TIMELINE</span><h2>Experience</h2></div>
+
+    <div class="tl-item">
+      <div class="tl-date">12/2025 — Present</div>
+      <div>
+        <div class="tl-role">Project Lead</div>
+        <div class="tl-org">HSM-Terra — AMR for Agricultural Fields, Field Robot Event 2026</div>
+        <p class="tl-desc">Leading the localization and navigation team on an outdoor autonomous mobile robot, from perception through to closed-loop control.</p>
+        <ul class="tl-list">
+          <li>Built LiDAR- and vision-based perception with EKF sensor fusion across IMU, LiDAR, and wheel encoders to correct odometry drift from wheel slippage and shaft misalignment.</li>
+          <li>Developed a custom row-navigation system using RANSAC-based row detection, lane-keeping, and PID tuning for robust navigation across varied terrain.</li>
+          <li>Optimized a PID-based turning controller to reduce slippage errors — the robot outperformed over 75% of competing teams despite hardware limitations.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">01/2023 — 06/2023</div>
+      <div>
+        <div class="tl-role">Robotics Intern</div>
+        <div class="tl-org">Robotics and Control Lab, IIT Roorkee</div>
+        <p class="tl-desc">Led path planning for autonomous mobile robots in dynamic indoor environments, designing an elderly-assistive robot under Prof. P.M. Pathak.</p>
+        <ul class="tl-list">
+          <li>Ran ROS simulations comparing Dijkstra's and A* for indoor navigation; selected A* for its heuristic efficiency in disordered environments.</li>
+          <li>Architected a voice-control system for hands-free deployment and evaluated it in ROS and Gazebo across real-world scenarios.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">08/2020 — 06/2023</div>
+      <div>
+        <div class="tl-role">Executive Board Member</div>
+        <div class="tl-org">Thapar Amateur Astronomers Society</div>
+        <p class="tl-desc">Designed and built a 3D-printed Newtonian telescope with an Arduino-controlled equatorial mount — an embedded control system optimized for optical alignment.</p>
+        <ul class="tl-list">
+          <li>Led a rover project recognized in the final-year project cohort.</li>
+          <li>Organized astronomy symposiums with speakers from ISRO, DRDO, and IISc Bangalore.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sectionhead"><span class="tag">03 · BUILDS</span><h2>Projects</h2></div>
+    <div class="proj-grid">
+
+      <div class="card">
+        <div class="lead"><h3>Munch Mover — GPS-Based Autonomous Delivery Robot</h3><span class="period">01/24–07/24</span></div>
+        <p>Autonomous food delivery robot built under Dr. Ashish Purohit. Fused 2D LiDAR and GPS point-cloud data with a Kalman filter for mapping and state estimation, then combined predefined GPS waypoints with offline ROS-based map routing for global navigation.</p>
+        <div class="tags"><span class="tag-chip">ROS</span><span class="tag-chip">LiDAR</span><span class="tag-chip">GPS</span><span class="tag-chip">Kalman Filter</span></div>
+      </div>
+
+      <div class="card">
+        <div class="lead"><h3>Voice-Based Autonomous Mobile Robot</h3><span class="period">2023</span></div>
+        <p>Elderly-assistive indoor robot designed and fabricated with a focus on usability and safety, contributing toward a medical assistance device incubated at IIT Roorkee under Prof. P.M. Pathak.</p>
+        <div class="tags"><span class="tag-chip">ROS</span><span class="tag-chip">Path Planning</span><span class="tag-chip">Voice Control</span></div>
+      </div>
+
+      <div class="card">
+        <div class="lead"><h3>Countermeasure System for Parkinson's Patients</h3><span class="period">03/22–06/22</span></div>
+        <p>Worked with Dr. Rajnish Mallick's research team on a prototype that measures and analyzes hand vibration patterns to aid tremor diagnosis and disease-progression tracking.</p>
+        <div class="tags"><span class="tag-chip">Sensor Integration</span><span class="tag-chip">Signal Analysis</span></div>
+      </div>
+
+      <div class="card wide">
+        <div class="lead"><h3>HSM-Terra — Autonomous Mobile Robot for Agricultural Fields</h3><span class="period">12/25–Present</span></div>
+        <p>Project lead for an outdoor AMR competing in the Field Robot Event 2026. Full navigation stack: LiDAR/vision perception, EKF sensor fusion, RANSAC row detection, PID-tuned lane-keeping and turning control.</p>
+        <div class="metric">→ Outperformed 75%+ of competing teams, securing a top-ranking position despite hardware constraints</div>
+        <div class="tags"><span class="tag-chip">ROS2</span><span class="tag-chip">EKF</span><span class="tag-chip">RANSAC</span><span class="tag-chip">PID Control</span><span class="tag-chip">LiDAR</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sectionhead"><span class="tag">04 · STACK</span><h2>Technical Skills</h2></div>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h3>Programming &amp; Frameworks</h3>
+        <div class="skill-tags"><span>ROS</span><span>ROS2</span><span>Python</span><span>C</span><span>C++</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>Robotics &amp; Simulation</h3>
+        <div class="skill-tags"><span>Gazebo</span><span>MATLAB</span><span>Motion Planning</span><span>Robot Navigation</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>Hardware &amp; Systems</h3>
+        <div class="skill-tags"><span>Sensor Integration</span><span>Control Systems</span><span>CAD/CAE</span><span>LiDAR</span><span>GPS</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>Leadership</h3>
+        <div class="skill-tags"><span>Team Leadership</span><span>Project Management</span><span>Communication</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sectionhead"><span class="tag">05 · EDUCATION</span><h2>Education</h2></div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="school">Hochschule Schmalkalden</div>
+        <div class="degree">M.Eng. Mechatronics and Robotics</div>
+        <div class="meta">2025 — Present</div>
+      </div>
+      <div class="edu-card">
+        <div class="school">Thapar Institute of Engineering and Technology, Patiala</div>
+        <div class="degree">B.E. Mechanical Engineering · GPA 8.90/10.0</div>
+        <div class="meta">2020 — 2024</div>
+      </div>
+    </div>
+    <div class="achieve">Received a merit-based scholarship during undergraduate studies (2021–23).</div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <div>
+        <h2>Let's build something that navigates well.</h2>
+        <p>Open to robotics internships and student roles in Germany — perception, navigation, and motion planning.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:bhatnagarpriyam50@gmail.com"><span>Email</span><span>bhatnagarpriyam50@gmail.com</span></a>
+        <a href="tel:+4915510335474"><span>Phone</span><span>+49 155 1033 5474</span></a>
+        <a href="#" target="_blank" rel="noopener"><span>LinkedIn</span><span>→</span></a>
+        <a href="#" target="_blank" rel="noopener"><span>GitHub</span><span>→</span></a>
+      </div>
+    </div>
+    <div class="foot-meta">© 2026 PRIYAM BHATNAGAR — SCHMALKALDEN, DE</div>
+  </div>
+</footer>
+
+<script>
+  // draw background grid dots
+  const dotsGroup = document.getElementById('dots');
+  const cols = 24, rows = 6.5, spacing = 1000/cols;
+  let dotsSvg = '';
+  for(let x=0; x<=cols; x++){
+    for(let y=0; y<=6; y++){
+      dotsSvg += `<circle class="grid-dot" cx="${x*spacing}" cy="${y*40}" r="1.4"/>`;
+    }
+  }
+  dotsGroup.innerHTML = dotsSvg;
+</script>
+
+</body>
+</html>
