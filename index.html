@@ -256,7 +256,7 @@
     <div class="about-grid">
       <div>
         <p>I work at the intersection of mechanical engineering and robotics software — currently completing an M.Eng. in Mechatronics and Robotics after a B.E. in Mechanical Engineering. My focus is on the perception, localization, and navigation stack: turning sensor data (LiDAR, IMU, GPS, wheel encoders) into a reliable estimate of where a robot is, and a safe, efficient plan for where it should go next.</p>
-        <p>Recent work spans an indoor elderly-assistive robot, a GPS-guided delivery robot, and an outdoor agricultural AMR competing in the Field Robot Event 2026 — giving me hands-on range across ROS/ROS2, Gazebo simulation, sensor fusion (EKF/Kalman filtering), and classical path planning (Dijkstra, A*, RANSAC-based row detection).</p>
+        <p>Recent projects range from a Mars rover (European Rover Challenge 2026) and an F1TENTH race car to an agricultural field robot (Field Robot Event 2026), a GPS delivery robot, and an elderly-assistive indoor robot — giving me hands-on range across ROS/ROS2, Gazebo simulation, sensor fusion (EKF/Kalman filtering), and classical path planning (Dijkstra, A*, RANSAC-based row detection).</p>
       </div>
       <div class="langbox">
         <h3>Languages</h3>
@@ -272,6 +272,18 @@
 <section id="experience">
   <div class="wrap">
     <div class="sectionhead"><span class="tag">02 · TIMELINE</span><h2>Experience</h2></div>
+
+    <div class="tl-item">
+      <div class="tl-date">06/2026 — Present</div>
+      <div>
+        <div class="tl-role">Localization &amp; Navigation Lead</div>
+        <div class="tl-org">HSM.Aries Leapone — Mars Rover, European Rover Challenge 2026</div>
+        <p class="tl-desc">Responsible for how the rover maps terrain, tracks its own position, and plans and follows a route — from code to field testing.</p>
+        <ul class="tl-list">
+          <li>Best German team and 17th worldwide at ERC 2026, in the team's first year competing.</li>
+        </ul>
+      </div>
+    </div>
 
     <div class="tl-item">
       <div class="tl-date">12/2025 — Present</div>
@@ -321,6 +333,20 @@
     <div class="proj-grid">
 
       <div class="card wide">
+        <div class="lead"><h3>★ HSM.Aries Leapone — Mars Rover Navigation Stack, ERC 2026</h3><span class="period">06/26–Present</span></div>
+        <p>A navigation stack that lets a Mars rover cross rough terrain on its own: it reads the ground, plans a drivable route, and steers around obstacles that weren't on the map.</p>
+        <ul class="tl-list">
+          <li><b>Terrain map:</b> turned a LiDAR height scan into a map that marks steep or rough ground as off-limits, so the rover avoids it instead of getting stuck.</li>
+          <li><b>Route planning:</b> switched to Hybrid-A*, which respects the rover's turning radius and heading and stopped it looping at every waypoint.</li>
+          <li><b>Obstacle avoidance:</b> Pure Pursuit path following that curves smoothly around obstacles the depth camera spots live.</li>
+          <li><b>Localization:</b> EKF fusing filtered wheel odometry with the IMU, keeping drift to 2% of distance travelled despite wheel slip on loose soil.</li>
+          <li><b>Field-ready:</b> Docker for repeatable start-up on the rover, plus a mast status light that shows marshals the rover's state at a glance.</li>
+        </ul>
+        <div class="metric">→ Best German team and 17th worldwide at ERC 2026 — the team's first participation</div>
+        <div class="tags"><span class="tag-chip">ROS2</span><span class="tag-chip">Nav2</span><span class="tag-chip">Hybrid-A*</span><span class="tag-chip">Pure Pursuit</span><span class="tag-chip">EKF</span><span class="tag-chip">DBSCAN</span><span class="tag-chip">Docker</span><span class="tag-chip">micro-ROS</span></div>
+      </div>
+
+      <div class="card wide">
         <div class="lead"><h3>★ HSM-Terra — Autonomous Mobile Robot for Agricultural Fields</h3><span class="period">12/25–Present</span></div>
         <p>Project lead for an outdoor AMR competing in the Field Robot Event 2026. Full navigation stack: LiDAR/vision perception, EKF sensor fusion, RANSAC row detection, PID-tuned lane-keeping and turning control.</p>
         <div class="demo-grid">
@@ -339,6 +365,17 @@
         </div>
         <div class="metric">→ Outperformed 75%+ of competing teams, securing a top-ranking position despite hardware constraints</div>
         <div class="tags"><span class="tag-chip">ROS2</span><span class="tag-chip">EKF</span><span class="tag-chip">RANSAC</span><span class="tag-chip">PID Control</span><span class="tag-chip">LiDAR</span></div>
+      </div>
+
+      <div class="card">
+        <div class="lead"><h3>F1TENTH — Autonomous Racing Vehicle</h3><span class="period">09/26–Present</span></div>
+        <p>Leading the autonomy for a 1:10-scale race car: knowing where it is, holding its line, and going fast without crashing.</p>
+        <ul class="tl-list">
+          <li><b>Localization:</b> LiDAR scan matching with a particle filter, which works indoors without GPS and doesn't drift when the wheels slip.</li>
+          <li><b>Control:</b> lane-keeping that centres the car between the walls, since small errors at racing speed end in a crash.</li>
+          <li><b>Simulation:</b> tuning in NVIDIA Isaac Sim before risking the real car; exploring reinforcement learning for the driving policy.</li>
+        </ul>
+        <div class="tags"><span class="tag-chip">ROS2</span><span class="tag-chip">Python</span><span class="tag-chip">Particle Filter</span><span class="tag-chip">LiDAR</span><span class="tag-chip">NVIDIA Isaac Sim</span></div>
       </div>
 
       <div class="card">
@@ -380,16 +417,28 @@
     <div class="sectionhead"><span class="tag">04 · STACK</span><h2>Technical Skills</h2></div>
     <div class="skill-groups">
       <div class="skill-group">
-        <h3>Programming &amp; Frameworks</h3>
-        <div class="skill-tags"><span>ROS</span><span>ROS2</span><span>Python</span><span>C</span><span>C++</span></div>
+        <h3>Programming &amp; Software</h3>
+        <div class="skill-tags"><span>Python</span><span>C</span><span>C++</span><span>ROS</span><span>ROS2</span><span>Git</span><span>Linux</span><span>MATLAB</span></div>
       </div>
       <div class="skill-group">
-        <h3>Robotics &amp; Simulation</h3>
-        <div class="skill-tags"><span>Gazebo</span><span>MATLAB</span><span>Motion Planning</span><span>Robot Navigation</span></div>
+        <h3>Planning &amp; Control</h3>
+        <div class="skill-tags"><span>Nav2</span><span>Hybrid-A*</span><span>A*</span><span>Dijkstra</span><span>DWA</span><span>Pure Pursuit</span><span>PID</span><span>TSP Tour Planning</span><span>Motion Planning</span><span>Control Systems</span></div>
       </div>
       <div class="skill-group">
-        <h3>Hardware &amp; Systems</h3>
-        <div class="skill-tags"><span>Sensor Integration</span><span>Control Systems</span><span>CAD/CAE</span><span>LiDAR</span><span>GPS</span></div>
+        <h3>Estimation &amp; Perception</h3>
+        <div class="skill-tags"><span>EKF / Kalman Filter</span><span>SLAM</span><span>Particle Filter</span><span>Sensor Fusion</span><span>RANSAC</span><span>DBSCAN</span><span>Occupancy Grids</span><span>Scan Matching</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>Simulation &amp; Tools</h3>
+        <div class="skill-tags"><span>Gazebo</span><span>RViz</span><span>NVIDIA Isaac Sim</span><span>MATLAB/Simulink</span><span>Docker</span><span>pytest</span><span>CI/CD</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>CAD &amp; Manufacturing</h3>
+        <div class="skill-tags"><span>SolidWorks</span><span>PTC Creo</span><span>Ansys</span><span>Eagle CAD</span><span>3D Printing</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>Hardware &amp; Embedded</h3>
+        <div class="skill-tags"><span>LiDAR</span><span>IMU</span><span>GPS</span><span>Depth Camera</span><span>ODrive/CAN</span><span>micro-ROS</span><span>Teensy</span><span>ESP32</span><span>Raspberry Pi</span><span>PWM Motor Control</span><span>Interrupt-driven Encoders</span><span>Bluetooth/BLE</span><span>Sensor Integration</span></div>
       </div>
       <div class="skill-group">
         <h3>Leadership</h3>
